@@ -41,13 +41,13 @@ const getSortableDate = (date:string | undefined) => {
 
 export function sortPrizes(prizeData : NobelPrizeEntry[] ,sortSelected : SortOrder, selectedLanguage : Language ): NobelPrizeEntry[]{
     switch (sortSelected) {
-        case "dateDescending":
+        case "dateAscending":
             return prizeData.sort((p1, p2) => {
                 let a = getSortableDate(p1.dateAwarded);
                 let b = getSortableDate(p2.dateAwarded);
                 return a > b ? 1 : a < b ? -1 : 0;
             })
-        case "dateAscending":
+        case "dateDescending":
             return prizeData.sort((p1, p2) => {
                 let a = getSortableDate(p2.dateAwarded);
                 let b = getSortableDate(p1.dateAwarded);

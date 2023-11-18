@@ -1,3 +1,7 @@
 .language-select{
   display: flex;
+  justify-content: end;
 }
+/* h1{
+  font-size: clamp(2em, 5em);
+} */

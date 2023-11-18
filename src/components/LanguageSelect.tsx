@@ -1,13 +1,31 @@
+
 import { Language } from "../model/Types";
+import Button from '@mui/material/Button'
+
+import { ToggleButtonGroup, ToggleButton } from '@mui/material';
 
 
-const LanguageSelect = (props : {setSelectedLanguage: (lang : Language) => void}) => {
-    
+const LanguageSelect = (props : {setSelectedLanguage: (lang : Language) => void, selectedLanguage : Language} ) => {
+
     return (
         <div className="language-select">
-            <div onClick={e => props.setSelectedLanguage("en")}>EN🇬🇧</div>
-            <div onClick={e => props.setSelectedLanguage("se")}>SE🇸🇪</div>
-            <div onClick={e => props.setSelectedLanguage("no")}>NO🇳🇴</div>
+            <ToggleButtonGroup
+             value={props.selectedLanguage}
+             exclusive
+             onChange={(e, value) => props.setSelectedLanguage(value)}
+            >
+                <ToggleButton value="en">
+                    EN
+                </ToggleButton>
+                <ToggleButton value="se">
+                    SE
+                </ToggleButton>
+                <ToggleButton value="no">
+                    NO
+                </ToggleButton>
+
+            </ToggleButtonGroup>
+           
         </div>
     );
 };

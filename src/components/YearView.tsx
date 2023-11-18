@@ -3,6 +3,10 @@ import { useParams } from 'react-router-dom';
 import { getPrizesByYear, sortPrizes } from '../services/NobelPrizeService';
 import { NobelPrizeEntry, Language, SortOrder } from '../model/Types'
 import { Link } from 'react-router-dom';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, IconButton, Container } from '@mui/material'
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 const YearView = () => {
     const { yearSelected, languageSelected } = useParams<{yearSelected : string, languageSelected : Language}>();
     const [prizeData, setPrizeData] = useState<NobelPrizeEntry[]>([]);
@@ -17,46 +21,56 @@ const YearView = () => {
     },[yearSelected])
 
    useEffect(() => {
-        console.log(sortSelected);
         sortPrizes(prizeData, sortSelected, languageSelected || "en");
-        console.log(prizeData);
    },[sortSelected, languageSelected, prizeData])
 
     return (
-        <div>
-            <Link to="/">↩️</Link>
-            <h1>{yearSelected}</h1>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Date Awarded
-                            <button onClick={e => setSortSelected("dateAscending")}>^</button>
-                            <button onClick={e => setSortSelected("dateDescending")}>V</button>
-                        </th>
-                        <th>Category
-                            <button onClick={e => setSortSelected("categoryAscending")}>^</button>
-                            <button onClick={e => setSortSelected("categoryDescending")}>V</button>
-                        </th>
-                        <th>Prize amount
-                            
-                        </th>
-                        <th>Year Awarded
-                            
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                {prizeData.map((entry: NobelPrizeEntry, index) => {
-                    return <tr key={index}>
-                        <td>{entry.dateAwarded}</td>
-                        <td>{entry.category[languageSelected || "en"]}</td>
-                        <td>{entry.prizeAmount.toLocaleString()}</td>
-                        <td></td>
-                    </tr>
-                })}
-                </tbody>
-            </table>
-        </div>
+        <Container maxWidth={false}>
+            <Link to="/">
+                <IconButton color='primary'>
+                    <ArrowBackIosIcon></ArrowBackIosIcon>
+                </IconButton>
+            </Link>
+            <Typography variant="h1" color="initial">Prizes awarded in {yearSelected}</Typography>
+            <TableContainer>
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell> 
+                                Category 
+                                <IconButton color="primary" onClick={e => setSortSelected("categoryDescending")}> 
+                                    <KeyboardArrowDownIcon/>    
+                                </IconButton>
+                                <IconButton color="primary" onClick={e => setSortSelected("categoryAscending")}>
+                                    <KeyboardArrowUpIcon/> 
+                                </IconButton>
+                            </TableCell>
+                            <TableCell> 
+                                Date awarded 
+                                <IconButton color="primary" onClick={e => setSortSelected("dateDescending")}> 
+                                    <KeyboardArrowDownIcon/>    
+                                </IconButton>
+                                <IconButton color="primary" onClick={e => setSortSelected("dateAscending")}>
+                                    <KeyboardArrowUpIcon/> 
+                                </IconButton>
+                            </TableCell>
+                            <TableCell> Prize amount </TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {prizeData.map((entry, index) => {
+                            return <TableRow key={index}>
+                                        <TableCell> {entry.category[languageSelected || "en"]} </TableCell>
+                                        <TableCell> {entry.dateAwarded} </TableCell>
+                                        <TableCell> {entry.prizeAmount.toLocaleString()} </TableCell>
+                                    </TableRow>
+                        })}
+
+                    </TableBody>
+                </Table>
+            </TableContainer>
+            
+        </Container>
     );
 };
 
