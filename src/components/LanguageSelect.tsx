@@ -1,7 +1,5 @@
 
 import { Language } from "../model/Types";
-import Button from '@mui/material/Button'
-
 import { ToggleButtonGroup, ToggleButton } from '@mui/material';
 
 
@@ -23,9 +21,7 @@ const LanguageSelect = (props : {setSelectedLanguage: (lang : Language) => void,
                 <ToggleButton value="no">
                     NO
                 </ToggleButton>
-
             </ToggleButtonGroup>
-           
         </div>
     );
 };

@@ -3,7 +3,7 @@ import { getUniqueYears } from '../services/NobelPrizeService';
 import { Link } from 'react-router-dom';
 import { Language } from '../model/Types';
 import LanguageSelect from './LanguageSelect';
-import {FormControl, FormLabel, Select, SelectChangeEvent, MenuItem, Typography, Container, Stack,  IconButton} from '@mui/material'
+import {FormControl, Select, SelectChangeEvent, MenuItem, Typography, Container, Stack,  IconButton} from '@mui/material'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 
@@ -31,7 +31,6 @@ const WelcomeView = () => {
         <LanguageSelect setSelectedLanguage={setSelectedLanguage} selectedLanguage={selectedLanguage}></LanguageSelect>
         <Container>
             <Stack>
-            
                 <Typography variant="h2" color="initial">Nobel Prize catalogue</Typography>
 
                 <Container disableGutters={true} sx={{ display: 'inline-flex', justifyContent: 'space-between'}}>
