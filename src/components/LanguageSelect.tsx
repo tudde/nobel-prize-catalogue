@@ -1,9 +1,10 @@
-
-import { Language } from "../model/Types";
+import { Language, flagMap } from "../model/Types";
 import { ToggleButtonGroup, ToggleButton } from '@mui/material';
 
 
 const LanguageSelect = (props : {setSelectedLanguage: (lang : Language) => void, selectedLanguage : Language} ) => {
+
+
 
     return (
         <div className="language-select">
@@ -12,15 +13,10 @@ const LanguageSelect = (props : {setSelectedLanguage: (lang : Language) => void,
              exclusive
              onChange={(e, value) => props.setSelectedLanguage(value)}
             >
-                <ToggleButton value="en">
-                    EN
-                </ToggleButton>
-                <ToggleButton value="se">
-                    SE
-                </ToggleButton>
-                <ToggleButton value="no">
-                    NO
-                </ToggleButton>
+                {["en", "se", "no"].map(lang => {
+                    return <ToggleButton value={lang}>{flagMap.get(lang)}</ToggleButton>
+                    
+                })}
             </ToggleButtonGroup>
         </div>
     );

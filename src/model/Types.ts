@@ -10,3 +10,9 @@ export type NobelPrizeEntry = {
 export type Language = "en" | "se" | "no"
 
 export type SortOrder = "dateAscending" | "dateDescending" | "categoryAscending" | "categoryDescending" | undefined
+
+export const flagMap = new Map<string, string>([
+    ["en", "🇬🇧"],
+    ["se", "🇸🇪"],
+    ["no", "🇳🇴"]
+]);
