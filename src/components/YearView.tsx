@@ -68,7 +68,7 @@ const YearView = () => {
                         {prizeData.map((entry, index) => {
                             return <TableRow key={index}>
                                         <TableCell> {entry.category[languageSelected || "en"]} </TableCell>
-                                        <TableCell> {entry.dateAwarded} </TableCell>
+                                        <TableCell> {new Date(entry.dateAwarded).toLocaleDateString()} </TableCell>
                                         <TableCell> {entry.prizeAmount.toLocaleString()} </TableCell>
                                     </TableRow>
                         })}
