@@ -26,6 +26,13 @@ const YearView = () => {
         sortPrizes(prizeData, sortSelected, languageSelected || "en");
    },[sortSelected, languageSelected, prizeData])
 
+   const formatDate = (dateString : string | undefined) => {
+        if (dateString === undefined){
+            return "-"
+        }
+        return new Date(dateString).toLocaleDateString();
+   }
+
     return (
         <>
         <Container maxWidth={false} sx={{display: "flex", justifyContent: "space-between", height: "50px"}}>
@@ -68,7 +75,7 @@ const YearView = () => {
                         {prizeData.map((entry, index) => {
                             return <TableRow key={index}>
                                         <TableCell> {entry.category[languageSelected || "en"]} </TableCell>
-                                        <TableCell> {new Date(entry.dateAwarded).toLocaleDateString()} </TableCell>
+                                        <TableCell> {formatDate(entry.dateAwarded)} </TableCell>
                                         <TableCell> {entry.prizeAmount.toLocaleString()} </TableCell>
                                     </TableRow>
                         })}
