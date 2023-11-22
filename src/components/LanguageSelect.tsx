@@ -14,7 +14,7 @@ const LanguageSelect = (props : {setSelectedLanguage: (lang : Language) => void,
              onChange={(e, value) => props.setSelectedLanguage(value)}
             >
                 {["en", "se", "no"].map(lang => {
-                    return <ToggleButton value={lang}>{flagMap.get(lang)}</ToggleButton>
+                    return <ToggleButton value={lang} sx={{fontSize: "1.5em"}}>{flagMap.get(lang)}</ToggleButton>
                     
                 })}
             </ToggleButtonGroup>

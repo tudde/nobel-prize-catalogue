@@ -7,6 +7,8 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typog
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ThemeSelect from './ThemeSelect';
+
 const YearView = () => {
     const { yearSelected, languageSelected } = useParams<{yearSelected : string, languageSelected : Language}>();
     const [prizeData, setPrizeData] = useState<NobelPrizeEntry[]>([]);
@@ -25,32 +27,37 @@ const YearView = () => {
    },[sortSelected, languageSelected, prizeData])
 
     return (
+        <>
+        <Container maxWidth={false} sx={{display: "flex", justifyContent: "space-between", height: "50px"}}>
+                <Link to="/">
+                    <IconButton color='secondary'>
+                        <ArrowBackIosIcon></ArrowBackIosIcon>
+                    </IconButton>
+                </Link>
+                <ThemeSelect></ThemeSelect>
+            </Container>
         <Container maxWidth={false}>
-            <Link to="/">
-                <IconButton color='primary'>
-                    <ArrowBackIosIcon></ArrowBackIosIcon>
-                </IconButton>
-            </Link>
-            <Typography variant="h1" color="initial">Prizes awarded in {yearSelected}</Typography>
+            
+            <Typography variant="h1" >Prizes awarded in {yearSelected}</Typography>
             <TableContainer>
                 <Table>
-                    <TableHead>
-                        <TableRow>
+                    <TableHead >
+                        <TableRow color="primary">
                             <TableCell> 
                                 Category 
-                                <IconButton color="primary" onClick={e => setSortSelected("categoryDescending")}> 
+                                <IconButton color="secondary" onClick={e => setSortSelected("categoryDescending")}> 
                                     <KeyboardArrowDownIcon/>    
                                 </IconButton>
-                                <IconButton color="primary" onClick={e => setSortSelected("categoryAscending")}>
+                                <IconButton color="secondary" onClick={e => setSortSelected("categoryAscending")}>
                                     <KeyboardArrowUpIcon/> 
                                 </IconButton>
                             </TableCell>
                             <TableCell> 
                                 Date awarded 
-                                <IconButton color="primary" onClick={e => setSortSelected("dateDescending")}> 
+                                <IconButton color="secondary" onClick={e => setSortSelected("dateDescending")}> 
                                     <KeyboardArrowDownIcon/>    
                                 </IconButton>
-                                <IconButton color="primary" onClick={e => setSortSelected("dateAscending")}>
+                                <IconButton color="secondary" onClick={e => setSortSelected("dateAscending")}>
                                     <KeyboardArrowUpIcon/> 
                                 </IconButton>
                             </TableCell>
@@ -65,12 +72,11 @@ const YearView = () => {
                                         <TableCell> {entry.prizeAmount.toLocaleString()} </TableCell>
                                     </TableRow>
                         })}
-
                     </TableBody>
                 </Table>
             </TableContainer>
-            
         </Container>
+        </>
     );
 };
 
